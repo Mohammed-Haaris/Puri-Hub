@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Clean Background -->
+  <rect width="1024" height="1024" fill="#faf9f5"/>
+  
+  <!-- Subtle circular crop guide ring for WhatsApp (faint) -->
+  <circle cx="512" cy="512" r="500" fill="none" stroke="#f0ede6" stroke-width="2"/>
+
+  <!-- Centered Navbar-Style Orange Stadium Pill Badge -->
+  <!-- Pill width: 780, height: 320, rx: 160 -->
+  <rect x="122" y="352" width="780" height="320" rx="160" fill="#FF7D00"/>
+
+  <!-- Bold Typography 'PURI-HUB' in Light Gray (#faf9f5) -->
+  <text 
+    x="512" 
+    y="545" 
+    font-family="'Outfit', 'Montserrat', 'Arial Black', sans-serif" 
+    font-size="124" 
+    font-weight="900" 
+    letter-spacing="-3" 
+    text-anchor="middle" 
+    fill="#faf9f5"
+  >
+    PURI-HUB
+  </text>
+</svg>

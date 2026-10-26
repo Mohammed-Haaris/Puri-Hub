@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puri-Hub WhatsApp DP Download</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f3ef;
+      color: #1f1f1f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      padding: 32px;
+      border-radius: 28px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .preview-box {
+      width: 320px;
+      height: 320px;
+      margin: 0 auto 24px;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid #eaeaea;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .circle-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+      display: none;
+    }
+    .circle-overlay.active {
+      display: block;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    button {
+      padding: 14px 24px;
+      border-radius: 9999px;
+      border: none;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-png {
+      background: #FF7D00;
+      color: white;
+    }
+    .btn-png:hover {
+      background: #e06d00;
+      transform: translateY(-1px);
+    }
+    .btn-jpeg {
+      background: #1f1f1f;
+      color: white;
+    }
+    .btn-jpeg:hover {
+      background: #333;
+      transform: translateY(-1px);
+    }
+    .btn-toggle {
+      background: #f0ede6;
+      color: #444;
+      font-size: 13px;
+      padding: 10px 16px;
+      margin-bottom: 12px;
+      width: auto;
+      align-self: center;
+    }
+    .btn-toggle:hover {
+      background: #e4e0d7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Puri-Hub WhatsApp DP</h1>
+    <p>1024 × 1024 High-Resolution Logo identical to navbar</p>
+
+    <div class="preview-box">
+      <canvas id="logoCanvas" width="1024" height="1024"></canvas>
+      <div id="circleOverlay" class="circle-overlay"></div>
+    </div>
+
+    <button id="toggleCrop" class="btn-toggle">
+      👁 Toggle WhatsApp Circle Crop Preview
+    </button>
+
+    <div class="buttons">
+      <button id="downloadPng" class="btn-png">
+        ⬇ Download as PNG (.png)
+      </button>
+      <button id="downloadJpeg" class="btn-jpeg">
+        ⬇ Download as JPEG (.jpg)
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('logoCanvas');
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('circleOverlay');
+
+    // Wait for fonts to load for accurate rendering
+    document.fonts.ready.then(() => {
+      drawLogo();
+    });
+
+    function drawLogo() {
+      // 1. Solid Off-white background
+      ctx.fillStyle = '#faf9f5';
+      ctx.fillRect(0, 0, 1024, 1024);
+
+      // 2. Draw Stadium Pill Badge
+      const pillW = 780;
+      const pillH = 320;
+      const pillX = (1024 - pillW) / 2;
+      const pillY = (1024 - pillH) / 2;
+      const pillR = pillH / 2;
+
+      ctx.beginPath();
+      ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
+      ctx.fillStyle = '#FF7D00';
+      ctx.fill();
+
+      // 3. Draw Typography 'PURI-HUB'
+      ctx.fillStyle = '#faf9f5';
+      ctx.font = "900 126px 'Outfit', 'Montserrat', 'Arial Black', sans-serif";
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.letterSpacing = '-2px';
+      ctx.fillText('PURI-HUB', 512, 512);
+    }
+
+    // Toggle circular crop
+    document.getElementById('toggleCrop').addEventListener('click', () => {
+      overlay.classList.toggle('active');
+    });
+
+    // Download PNG
+    document.getElementById('downloadPng').addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = 'puri-hub-whatsapp-dp.png';
+      link.href = canvas.toDataURL('image/png', 1.0);
+      link.click();
+    });
+
+    // Download JPEG
+    document.getElementById('downloadJpeg').addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = 'puri-hub-whatsapp-dp.jpg';
+      link.href = canvas.toDataURL('image/jpeg', 0.98);
+      link.click();
+    });
+  </script>
+</body>
+</html>
